@@ -1,0 +1,15 @@
+<h1 mat-dialog-title align="center">User</h1>
+<div mat-dialog-content align="center">
+  <mat-form-field appearance="fill"  appearance="outline">
+    <mat-label>Enter an username</mat-label>
+    <input matInput [(ngModel)]="user.userName">
+  </mat-form-field>
+  <mat-form-field appearance="fill" appearance="outline">
+    <mat-label>Enter a password</mat-label>
+    <input matInput [(ngModel)]="user.password">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="user" cdkFocusInitial>Ok</button>
+</div>

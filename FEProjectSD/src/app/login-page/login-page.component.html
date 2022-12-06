@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="login-page.component.scss"/>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2 class="login-heading">Login</h2>
+      <label class="login-label">Username</label>
+      <input type="text" id="username" [(ngModel)]="username" placeholder="Username" required >
+      <br>
+      <label class="login-label">Password</label>
+      <input type="password" id="password" [(ngModel)]="password" placeholder="Password" required >
+
+      <div *ngIf="invalidLogin" class="invalid-login">*Invalid username or password</div>
+
+      <button class="btn" type="submit" (click)="login()">Login</button>
+
+    </div>
+  </body>
+</html>

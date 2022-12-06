@@ -1,0 +1,23 @@
+<h1 mat-dialog-title align="center">Device</h1>
+<div mat-dialog-content align="center">
+  <mat-form-field appearance="fill"  appearance="outline">
+    <mat-label>Enter description</mat-label>
+    <input matInput [(ngModel)]="device.description">
+  </mat-form-field>
+  <mat-form-field appearance="fill"  appearance="outline">
+    <mat-label>Enter address</mat-label>
+    <input matInput [(ngModel)]="device.address">
+  </mat-form-field>
+  <mat-form-field appearance="fill"  appearance="outline">
+    <mat-label>Enter maximum consumption</mat-label>
+    <input matInput [(ngModel)]="device.maxConsumption">
+  </mat-form-field>
+  <mat-form-field appearance="fill" appearance="outline">
+    <mat-label>Enter UserId</mat-label>
+    <input matInput [(ngModel)]="device.userId">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="device" cdkFocusInitial>Ok</button>
+</div>

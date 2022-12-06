@@ -1,0 +1,87 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <h3>Client Page</h3>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" type="button" (click)="logOut()">LogOut</a>
+  </li>
+</ul>
+
+<br>
+
+<h1>Device Table</h1>
+<table mat-table [dataSource]="devicesSource" class="mat-elevation-z8 demo-table table table-dark table-striped ">
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let element">{{element.description}}</td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef>Address</th>
+    <td mat-cell *matCellDef="let element">{{element.address}}</td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="maxConsumption">
+    <th mat-header-cell *matHeaderCellDef>MaxConsumption</th>
+    <td mat-cell *matCellDef="let element">{{element.maxConsumption}}</td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="userId">
+    <th mat-header-cell *matHeaderCellDef>UserId</th>
+    <td mat-cell *matCellDef="let element">{{element.userId}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="calendar">
+    <th mat-header-cell *matHeaderCellDef>Calendar</th>
+    <td mat-cell *matCellDef="let element">
+      <form class="row row-cols-sm-auto">
+        <div class="col-12">
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="dp"
+              [(ngModel)]="model"
+              ngbDatepicker
+              #d="ngbDatepicker"
+            />
+            <button mat-icon-button color="warn" (click)="d.toggle()"  type="button"><mat-icon>calendar_today</mat-icon></button>
+          </div>
+        </div>
+      </form>
+
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="daily consumption">
+    <th mat-header-cell *matHeaderCellDef>Daily Consumption</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="getChart(element)"  type="button">
+        <mat-icon style="-webkit-text-fill-color:greenyellow"> bar_chart</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="deviceColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: deviceColumns;"></tr>
+</table>
+
+<div id="chart">
+  <apx-chart
+    [series]="chartOptions.series!"
+    [chart]="chartOptions.chart!"
+    [xaxis]="chartOptions.xaxis!"
+    [dataLabels]="chartOptions.dataLabels!"
+    [grid]="chartOptions.grid!"
+    [stroke]="chartOptions.stroke!"
+    [title]="chartOptions.title!"
+  ></apx-chart>
+</div>
+<hr />
+
