@@ -25,7 +25,8 @@ testGroup: FormGroup = new FormGroup({
         console.log(data);
         this.user.userName=data.username;
         this.user.password=data.password;
-    }
+        this.user.name=data.name;
+      }
 
   }
 

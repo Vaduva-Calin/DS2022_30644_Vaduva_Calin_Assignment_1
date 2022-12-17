@@ -1,0 +1,40 @@
+﻿version: '3'
+
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: calin
+      POSTGRES_USER: postgres
+      POSTGRES_DB: SD
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+
+  backend:
+    image: backend
+    restart: on-failure
+    ports:
+      - "7037:7037"
+    depends_on:
+      - postgres
+    environment:
+      DB_CONNECTION_STRING: "host=host.docker.internal;port=5432;database=SD;username=postgres;password=calin"
+      ASPNETCORE_URLS: http://+:7037
+     
+
+  frontend:
+    image: frontend
+    restart: on-failure
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+
+networks:
+  my-network:
+      external: true

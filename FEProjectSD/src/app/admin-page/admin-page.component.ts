@@ -29,7 +29,7 @@ import { DeviceDialogComponent } from '../device-dialog/device-dialog.component'
 export class AdminPageComponent implements OnInit {
   users!: User[];
   devices!: Device[];
-  displayedColumns: string[] = ['name', 'username', 'edit', 'delete'];
+  displayedColumns: string[] = ['id','name', 'username', 'edit', 'delete'];
   usersToDisplay = this.users;
   usersSource = new ExampleDataSource(this.usersToDisplay);
   deviceColumns: string[] = ['id', 'description', 'address', 'maxConsumption', 'userId', 'edit', 'delete'];
@@ -90,7 +90,7 @@ export class AdminPageComponent implements OnInit {
     console.log(u);
     let dialogRef = this.dialog.open(UserDialogComponent, {
       width: '400px',
-      data: { username: u.userName, password: u.password },
+      data: { username: u.userName, password: u.password, name: u.name},
       panelClass: 'dialog-container'
     });
 
@@ -100,6 +100,7 @@ export class AdminPageComponent implements OnInit {
         console.log("Edit " + userToEdit);
         u.userName = userToEdit.userName;
         u.password = userToEdit.password;
+        u.name = userToEdit.name;
         this.adminService.editUser(u).subscribe(()=>{
           this.getUsers();
           this.getDevices();
@@ -120,7 +121,6 @@ export class AdminPageComponent implements OnInit {
       this.userToAdd = result;
       if(this.userToAdd){
         console.log(this.userToAdd);
-        this.userToAdd.name = this.userToAdd.userName;
         this.userToAdd.role='user';
         this.adminService.addUser(this.userToAdd).subscribe(()=>{
           this.getUsers();
