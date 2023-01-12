@@ -1,0 +1,2 @@
+deviceId: 3
+secondsToRead: 5

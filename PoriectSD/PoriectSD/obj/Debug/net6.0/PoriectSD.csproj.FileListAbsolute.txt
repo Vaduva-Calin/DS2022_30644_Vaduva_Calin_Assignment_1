@@ -78,3 +78,5 @@ D:\An4Semestru1\SD\PoriectSD\PoriectSD\bin\Debug\net6.0\System.CodeDom.dll
 D:\An4Semestru1\SD\PoriectSD\PoriectSD\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 D:\An4Semestru1\SD\PoriectSD\PoriectSD\bin\Debug\net6.0\System.Text.Json.dll
 D:\An4Semestru1\SD\PoriectSD\PoriectSD\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+D:\An4Semestru1\SD\PoriectSD\PoriectSD\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\An4Semestru1\SD\PoriectSD\PoriectSD\bin\Debug\net6.0\RabbitMQ.Client.dll

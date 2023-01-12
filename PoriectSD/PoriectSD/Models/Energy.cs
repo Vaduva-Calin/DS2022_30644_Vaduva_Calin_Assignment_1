@@ -7,7 +7,7 @@ namespace PoriectSD.Models
     {
         public int Id { get; set; }
         public DateTime Timestamp { get; set; }
-        public double EnergyConsumption { get; set; }
+        public double EnergyConsumption { get; set; } = 0;
         public int DeviceId { get; set; }
 
     }

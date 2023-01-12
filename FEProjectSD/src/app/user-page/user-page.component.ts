@@ -1,3 +1,4 @@
+import { SignalRService } from './../services/signal-r.service';
 import { Energy } from './../models/energy';
 import { EnergyService } from './../services/energy.service';
 import { DeviceService } from './../services/device.service';
@@ -38,11 +39,13 @@ export type ChartOptions = {
 export class UserPageComponent implements OnInit {
   userId: number=0;
   devices!: Device[];
+  currentDevice!: Device;
   deviceColumns: string[] = ['description', 'address', 'maxConsumption', 'userId','calendar', 'daily consumption'];
   devicesToDisplay = this.devices;
   devicesSource = new ExampleDataSource(this.devicesToDisplay);
   energies?: Energy[] = [];
 	model?: NgbDateStruct;
+  id?: string;
   @ViewChild('chart') chart!: ChartComponent;
   chartOptions!: Partial<ChartOptions>;
 
@@ -53,7 +56,8 @@ export class UserPageComponent implements OnInit {
     private route: ActivatedRoute,
     private deviceService: DeviceService,
     private energyService: EnergyService,
-    private parserFormatter: NgbDateParserFormatter
+    private parserFormatter: NgbDateParserFormatter,
+    private signalRService: SignalRService
     ) {
     this.generateChart();
   }
@@ -64,8 +68,16 @@ export class UserPageComponent implements OnInit {
       this.userId=+id!;
       console.log(this.userId);
       this.isUserAuthenticated();
+      this.initiateWebSocket();
     })
 
+  }
+
+  initiateWebSocket(){
+    this.signalRService.startConnection();
+    this.signalRService.refreshChart();
+    this.signalRService.notification();
+    this.signalRService.refreshChart$.subscribe(()=> this.getChart(this.currentDevice));
   }
 
   isUserAuthenticated(){
@@ -94,6 +106,7 @@ export class UserPageComponent implements OnInit {
   }
 
   getChart(element:Device){
+    this.currentDevice = element;
     var eConsum: number[] = [];
     let date = this.parserFormatter.format(this.model!);
     this.energyService.getEnergyForDevices(element.id!, date).subscribe({
